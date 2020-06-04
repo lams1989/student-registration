@@ -2,16 +2,19 @@ package com.luigy.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
 import java.io.Serializable;
 
 @Named
 @SessionScoped
 public class StudentBean implements Serializable {
-	
+
 	List<Student> studentList = new ArrayList<Student>();
 	/**
 	 * 
@@ -19,10 +22,53 @@ public class StudentBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public List<Student> studentsList() {
-		
+
 		return studentList;
 	}
 
+	public String editStudentRecord(int studentId) {
+		Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getId() == studentId) {
+				sessionMapObj.put("editRecordObj", studentList.get(i));
+			}
+		}
+
+		return "/editStudent.xhtml?faces-redirect=true";
+	}
+	
+	public String createStudentRecord() {
+		Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMapObj.put("editRecordObj", new Student());
+		return "/createStudent.xhtml?faces-redirect=true";
+	}
+
+	public String updateStudentDetails(Student retorno) {
+		for (int i = 0 ; i < studentList.size(); i++) {
+			if(studentList.get(i).getId() == retorno.getId()) {
+				studentList.get(i).setName(retorno.getName());
+				studentList.get(i).setAddress(retorno.getAddress());
+				studentList.get(i).setEmail(retorno.getEmail());
+				studentList.get(i).setGender(retorno.getGender());
+			}
+		}
+		return "/studentsList.xhtml?faces-redirect=true";
+	}
+	
+	public String deleteStudentRecord(int studentId) {
+		
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getId() == studentId) {
+				studentList.remove(i);
+			}
+		}
+		return "/studentsList.xhtml?faces-redirect=true";
+	}
+	
+	
+	
+	
 	@PostConstruct
 	public void init() {
 		Student person1 = new Student(1, "Luis Muñoz", "LuisMunoz@email.com", "12345", "M", "corrientes 6477");

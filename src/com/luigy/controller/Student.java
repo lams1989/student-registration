@@ -7,6 +7,10 @@ public class Student {
 	private String password;
 	private String gender;
 	private String address;
+	
+	public Student() {
+		super();
+	}
 
 	public Student(int id, String name, String email, String password, String gender, String address) {
 		super();
