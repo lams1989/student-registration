@@ -40,7 +40,12 @@ public class StudentBean implements Serializable {
 	
 	public String createStudentRecord() {
 		Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-		sessionMapObj.put("editRecordObj", new Student());
+		
+		Student createNew = new Student();
+		createNew.setId(studentList.size() + 1);
+		
+		sessionMapObj.put("editRecordObj", createNew);
+		
 		return "/createStudent.xhtml?faces-redirect=true";
 	}
 
@@ -66,7 +71,11 @@ public class StudentBean implements Serializable {
 		return "/studentsList.xhtml?faces-redirect=true";
 	}
 	
-	
+	public String saveStudentDetails(Student editRecordObj) {
+		studentList.add(editRecordObj);
+		
+		return "/studentsList.xhtml?faces-redirect=true";
+	}
 	
 	
 	@PostConstruct

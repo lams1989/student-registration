@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+	
+	<title>CRUD MY RECIPES</title>
+	<style type="text/css">
+		.tableUpdated {
+			width: 90% !important;
+			margin: 17px 58px 0 !important;
+		}
+		
+		.btnSpace {
+			margin: 17px;
+		}
+	</style>
+</h:head>
+<h:body>
+	<center>
+		<h2>
+			<h:outputText value="RECIPE RECORDS" />
+		</h2>
+	</center>
+	<h:form id="recipeForm">
+		<h:dataTable id="recipeTable" binding="#{table}"
+			value="#{recipeBean.recipesList()}" var="recipe"
+			class="table table-striped table-hover table-bordered tableUpdated">
+			<h:column>
+				<f:facet name="header">Cod</f:facet>
+				<h:outputText value="#{recipe.cod}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Recipe Name</f:facet>
+				<h:outputText value="#{recipe.recipename}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ingredients</f:facet>
+				<h:outputText value="#{recipe.ingredients}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">process</f:facet>
+				<h:outputText value="#{recipe.process}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Plated Type</f:facet>
+				<h:outputText value="#{recipe.platedtype}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Update</f:facet>
+				<h:commandButton
+					action="#{recipeBean.editRecipeRecord(recipe.cod)}"
+					value="Update" class="btn btn-primary" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandButton
+					action="#{recipeBean.deleteRecipeRecord(recipe.cod)}"
+					value="Delete" class="btn btn-danger" />
+			</h:column>
+		</h:dataTable>
+		<center>
+			<h:commandButton action="#{recipeBean.createRecipeRecord()}"
+				value="Create New recipe" class="btn btn-success btnSpace" />
+		</center>
+	</h:form>
+</h:body>
+</html>
