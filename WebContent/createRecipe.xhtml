@@ -43,8 +43,8 @@
 			<div class="col-sm-4">
 				<h:inputText id="ingredients-cod"
 					value="#{editRecordObj.ingredients}" class="form-control"
-					validatorMessage="minimun two ingredients">
-					<f:validateRegex pattern="[a-zA-Z,]" />
+					validatorMessage="minimun 3 characters">
+					<f:validateLength minimum="3"/>
 				</h:inputText>
 				<h:message class="alert alert-danger" showSummary="true"
 					showDetail="false" id="errors2" for="ingredients-cod" />
@@ -76,6 +76,8 @@
 					<f:selectItem itemValue="table of presentation" itemLabel="Table of presentation" />
 					<f:validateRequired />
 				</h:selectOneRadio>
+				<h:message class="alert alert-danger" showSummary="true"
+					showDetail="false" id="errors4" for="platedtype-cod" />
 			</div>
 		</div>
 
