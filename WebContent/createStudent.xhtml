@@ -28,7 +28,8 @@
 		<div class="form-group">
 			<h:outputLabel for="username" class="control-label col-sm-4">User Name:</h:outputLabel>
 			<div class="col-sm-4">
-				<h:inputText id="name-id" value="#{editRecordObj.name}"
+				<h:inputText id="name-id" 
+					value="#{editRecordObj.name}"
 					class="form-control"
 					validatorMessage="User name minimium size 3 and max 100">
 					<f:validateLength minimum="3" maximum="100" />
@@ -40,8 +41,10 @@
 		<div class="form-group">
 			<h:outputLabel for="email" class="control-label col-sm-4">Email:</h:outputLabel>
 			<div class="col-sm-4">
-				<h:inputText id="email-id" value="#{editRecordObj.email}"
-					class="form-control" validatorMessage="Email wrong">
+				<h:inputText id="email-id" 
+					value="#{editRecordObj.email}"
+					class="form-control" 
+					validatorMessage="Email wrong">
 					<f:validateRegex
 						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
 				</h:inputText>
