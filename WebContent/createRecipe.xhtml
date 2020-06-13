@@ -1,73 +1,101 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
- 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <h:head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
-    <link rel="stylesheet" href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
-    <title>NEW RECIPE</title>
-    <style type="text/css">
-        .btnWidth {
-            width: 80px !important;
-        }     
-    </style>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet"
+		href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+	<title>NEW RECIPE</title>
+	<style type="text/css">
+.btnWidth {
+	width: 80px !important;
+}
+</style>
 </h:head>
 <h:body>
-    <h:form id="createStudentForm" class="form-horizontal">
-        <div class="form-group">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <h2>CREATE NEW RECIPE</h2>
-            </div>
-        </div>
-        <hr/>
-        <div class="form-group">
-            <h:outputLabel for="recipename" class="control-label col-sm-4">Recipe Name:</h:outputLabel>
-            <div class="col-sm-4">
-                <h:inputText id="recipename-cod" value="#{editRecordObj.recipename}" class="form-control" validatorMessage="recipename is required">
-                    <f:validateRequired />
-                </h:inputText>
-            </div>
-        </div>
-        <div class="form-group">
-            <h:outputLabel for="ingredients" class="control-label col-sm-4">ingredients:</h:outputLabel>
-            <div class="col-sm-4">
-                <h:inputText id="ingredients-cod" value="#{editRecordObj.ingredients}" class="form-control" validatorMessage="ingredients is required">
-                    <f:validateRequired/>
-                </h:inputText>
-            </div>
-        </div>
-        <div class="form-group">
-            <h:outputLabel for="process" class="control-label col-sm-4">Process:</h:outputLabel>
-            <div class="col-sm-4">
-                 <h:inputText id="process-cod" value="#{editRecordObj.process}" class="form-control" validatorMessage="Process is required">
-                    <f:validateRequired/>
-                </h:inputText>
-            </div>
-        </div>
-        <div class="form-group">
-            <h:outputLabel for="platedtype" class="control-label col-sm-4">Plated Type:</h:outputLabel>
-            <div class="col-sm-4">
-               <h:inputText id="platedtype-cod" value="#{editRecordObj.platedtype}" class="form-control" validatorMessage="plated type is required">
-                    <f:validateRequired/>
-               </h:inputText>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <div class="col-sm-2">
-                    <h:commandButton value="Save" action="#{recipeBean.saveRecipeDetails(editRecordObj)}" class="btn btn-success btnWidth" />
-                </div>
-                <div class="col-sm-1">
-                </div>
-                <div class="col-sm-2">
-                    <h:link outcome="recipesList" value="View Recipe Record List" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
-    </h:form>
+	<h:form id="createRecipeForm" class="form-horizontal">
+		<div class="form-group">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<h2>CREATE NEW RECIPE</h2>
+			</div>
+		</div>
+		<hr />
+		<div class="form-group">
+			<h:outputLabel for="recipename" class="control-label col-sm-4">Recipe name:</h:outputLabel>
+			<div class="col-sm-4">
+				<h:inputText id="recipename-cod" value="#{editRecordObj.recipename}"
+					class="form-control"
+					validatorMessage="User recipe name minimium size 3 and max 100">
+					<f:validateLength minimum="3" maximum="100" />
+				</h:inputText>
+				<h:message class="alert alert-danger" showSummary="true"
+					showDetail="false" id="errors1" for="recipename-cod" />
+				<cite> User recipe name minimum size 3 and max 100 </cite>
+			</div>
+		</div>
+		<div class="form-group">
+			<h:outputLabel for="ingredients" class="control-label col-sm-4">ingredients:</h:outputLabel>
+			<div class="col-sm-4">
+				<h:inputText id="ingredients-cod"
+					value="#{editRecordObj.ingredients}" class="form-control"
+					validatorMessage="minimun 3 characters">
+					<f:validateLength minimum="3"/>
+				</h:inputText>
+				<h:message class="alert alert-danger" showSummary="true"
+					showDetail="false" id="errors2" for="ingredients-cod" />
+				<cite> Minimum two separate ingredients of " , "</cite>
+			</div>
+		</div>
+		<div class="form-group">
+			<h:outputLabel for="process" class="control-label col-sm-4">Process:</h:outputLabel>
+			<div class="col-sm-4">
+				<h:inputTextarea id="process-cod" value="#{editRecordObj.process}"
+					cols="50" rows="5" 
+					class="form-control"
+					validatorMessage="the process minimium size 100 and max 1000 characters">
+					<f:validateLength minimum="100" maximum="1000" />
+				</h:inputTextarea>
+				<h:message class="alert alert-danger" showSummary="true"
+					showDetail="false" id="errors3" for="process-cod" />
+				<cite>The recipe must contain a minimum 100 and max 1000 characters </cite>
+			</div>
+		</div>
+		<div class="form-group">
+			<h:outputLabel for="platedtype" class="control-label col-sm-4">Plated type:</h:outputLabel>
+			<div class="col-sm-4">
+				<h:selectOneRadio id="platedtype-cod" value="#{editRecordObj.platedtype}"
+					validatorMessage="plated type is required">
+					<f:selectItem itemValue="Flat plate" itemLabel="flat plate" />
+					<f:selectItem itemValue="Base plat" itemLabel="Base plate" />
+					<f:selectItem itemValue="Bowl" itemLabel="Bowl" />
+					<f:selectItem itemValue="table of presentation" itemLabel="Table of presentation" />
+					<f:validateRequired />
+				</h:selectOneRadio>
+				<h:message class="alert alert-danger" showSummary="true"
+					showDetail="false" id="errors4" for="platedtype-cod" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<div class="col-sm-2">
+					<h:commandButton value="Save"
+						action="#{recipeBean.saveRecipeDetails(editRecordObj)}"
+						class="btn btn-success btnWidth" />
+				</div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					<h:link outcome="recipesList" value="View Recipe Record List"
+						class="btn btn-primary" />
+				</div>
+			</div>
+		</div>
+	</h:form>
 </h:body>
 </html>
