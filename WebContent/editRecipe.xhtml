@@ -39,11 +39,20 @@
                 </div>
             </div>
             <div class="form-group">
-                <h:outputLabel for="platedtype" class="control-label col-sm-2">Plated type:</h:outputLabel>
-                <div class="col-sm-4">
-                    <h:inputText id="platedtype-cod" value="#{editRecordObj.platedtype}" class="form-control"/>
-                </div>
-            </div>
+			<h:outputLabel for="platedtype" class="control-label col-sm-4">Plated type:</h:outputLabel>
+			<div class="col-sm-4">
+				<h:selectOneRadio id="platedtype-cod" value="#{editRecordObj.platedtype}"
+					validatorMessage="plated type is required">
+					<f:selectItem itemValue="Flat plate" itemLabel="flat plate" />
+					<f:selectItem itemValue="Base plat" itemLabel="Base plate" />
+					<f:selectItem itemValue="Bowl" itemLabel="Bowl" />
+					<f:selectItem itemValue="table of presentation" itemLabel="Table of presentation" />
+					<f:validateRequired />
+				</h:selectOneRadio>
+				<h:message class="alert alert-danger" showSummary="true"
+					showDetail="false" id="errors4" for="platedtype-cod" />
+			</div>
+		</div>
             <div class="form-group">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-4">
