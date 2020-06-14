@@ -1,4 +1,4 @@
-package com.luigy.controller;
+package com.luigy.controller.domain;
 
 public class Student {
 	private int id;

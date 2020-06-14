@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import com.luigy.controller.domain.Recipe;
+import com.luigy.repository.RecipeOperation;
+
 
 @Named
 @SessionScoped
@@ -19,7 +20,8 @@ public class RecipeBean implements Serializable  {
 	private static final long serialVersionUID = 1L;
 
 	public List<Recipe> recipesList() {
-
+		
+		recipeList = RecipeOperation.getRecipes();
 		return recipeList;
 	}
 	
@@ -36,26 +38,10 @@ public class RecipeBean implements Serializable  {
 	}
 	
 	public String updateRecipeDetails(Recipe recipeedit) {
-		for (int i = 0 ; i < recipeList.size(); i++) {
-			if(recipeList.get(i).getCod() == recipeedit.getCod()) {
-				recipeList.get(i).setRecipename(recipeedit.getRecipename());
-				recipeList.get(i).setIngredients(recipeedit.getIngredients());
-				recipeList.get(i).setProcess(recipeedit.getProcess());
-				recipeList.get(i).setPlatedtype(recipeedit.getPlatedtype());
-			}
-		}
+		RecipeOperation.updateRecipe(recipeedit);
 		return "/recipesList.xhtml?faces-redirect=true";
 	}
 	
-public String deleteRecipeRecord(int recipeCod) {
-		
-		for (int i = 0; i < recipeList.size(); i++) {
-			if (recipeList.get(i).getCod() == recipeCod) {
-				recipeList.remove(i);
-			}
-		}
-		return "/recipesList.xhtml?faces-redirect=true";
-	}
 
 public String createRecipeRecord() {
 	Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
@@ -69,20 +55,16 @@ public String createRecipeRecord() {
 }
 
 public String saveRecipeDetails(Recipe editRecordObj) {
-	recipeList.add(editRecordObj);
+	RecipeOperation.createRecipe(editRecordObj);
 	
 	return "/recipesList.xhtml?faces-redirect=true";
 }
 
-	@PostConstruct
-	public void init() {
-		Recipe recipe1 = new Recipe(1, "Ramen", "miso, cerdo, huevo, tofu, caldo", "armado", "plato hondo");
-		Recipe recipe2 = new Recipe(2, "lomo saltado", "lomo, cebolla, champignon, soja, ostion", "salteado", "plato plano");
-		
-		recipeList.add(recipe1);
-		recipeList.add(recipe2);
-		
-	}
+public String deleteRecipeRecord(int recipeCod) {
+	RecipeOperation.deleteRecipe(recipeCod);
+	return "/recipesList.xhtml?faces-redirect=true";
+}
+	
 	
 	
 }

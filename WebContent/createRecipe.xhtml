@@ -43,12 +43,12 @@
 			<div class="col-sm-4">
 				<h:inputText id="ingredients-cod"
 					value="#{editRecordObj.ingredients}" class="form-control"
-					validatorMessage="minimun 3 characters">
-					<f:validateLength minimum="3"/>
+					validatorMessage="minimun 10 characters">
+					<f:validateLength minimum=""/>
 				</h:inputText>
 				<h:message class="alert alert-danger" showSummary="true"
 					showDetail="false" id="errors2" for="ingredients-cod" />
-				<cite> Minimum two separate ingredients of " , "</cite>
+				<cite> Minimum 10 characters</cite>
 			</div>
 		</div>
 		<div class="form-group">
@@ -57,12 +57,12 @@
 				<h:inputTextarea id="process-cod" value="#{editRecordObj.process}"
 					cols="50" rows="5" 
 					class="form-control"
-					validatorMessage="the process minimium size 100 and max 1000 characters">
-					<f:validateLength minimum="100" maximum="1000" />
+					validatorMessage="the process minimium size 10 and max 1000 characters">
+					<f:validateLength minimum="10" maximum="1000" />
 				</h:inputTextarea>
 				<h:message class="alert alert-danger" showSummary="true"
 					showDetail="false" id="errors3" for="process-cod" />
-				<cite>The recipe must contain a minimum 100 and max 1000 characters </cite>
+				<cite>The recipe must contain a minimum 10 and max 1000 characters </cite>
 			</div>
 		</div>
 		<div class="form-group">

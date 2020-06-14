@@ -1,4 +1,4 @@
-package com.luigy.controller;
+package com.luigy.controller.domain;
 
 public class Recipe {
 	private int cod;
