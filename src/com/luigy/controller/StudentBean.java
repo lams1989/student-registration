@@ -17,11 +17,11 @@ import java.io.Serializable;
 public class StudentBean implements Serializable {
 
 	List<Student> studentList = new ArrayList<Student>();
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public List<Student> studentsList() {
-		
+
 		studentList = StudentOperation.getStudents();
 		return studentList;
 	}

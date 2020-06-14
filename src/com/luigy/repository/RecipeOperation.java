@@ -2,6 +2,7 @@ package com.luigy.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -46,11 +47,16 @@ public class RecipeOperation {
 
 	public static void createRecipe(Recipe recipe) {
 		try {
-			Statement stmt = getConnection().createStatement();
 			String sql = "INSERT INTO recipe (recipe_recipename, recipe_ingredients, recipe_process, recipe_platedtype) "
-					+ "VALUES ('" + recipe.getRecipename() + "', '" + recipe.getIngredients() + "', '"
-					+ recipe.getProcess() + "', '" + recipe.getPlatedtype() + "')";
-			stmt.execute(sql);
+					+ "VALUES (?, ? , ?, ?)";
+			PreparedStatement pps = getConnection().prepareStatement(sql);
+			pps.setString(1, recipe.getRecipename());
+			pps.setString(2, recipe.getIngredients());
+			pps.setString(3, recipe.getProcess());
+			pps.setString(4, recipe.getPlatedtype());
+
+			pps.executeUpdate();
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -58,12 +64,16 @@ public class RecipeOperation {
 
 	public static void updateRecipe(Recipe recipe) {
 		try {
-			Statement stmt = getConnection().createStatement();
-			String sql = "UPDATE recipe SET recipe_recipename = '" + recipe.getRecipename()
-					+ "', recipe_ingredients = '" + recipe.getIngredients() + "', recipe_process = '"
-					+ recipe.getProcess() + "', recipe_platedtype = '" + recipe.getPlatedtype()
-					+ "' WHERE recipe_cod = " + recipe.getCod();
-			stmt.execute(sql);
+
+			String sql = "UPDATE recipe SET recipe_recipename = ?, recipe_ingredients = ?, recipe_process = ?, recipe_platedtype = ? WHERE recipe_cod = ? ";
+			PreparedStatement pps = getConnection().prepareStatement(sql);
+			pps.setString(1, recipe.getRecipename());
+			pps.setString(2, recipe.getIngredients());
+			pps.setString(3, recipe.getProcess());
+			pps.setString(4, recipe.getPlatedtype());
+			pps.setInt(5, recipe.getCod());
+
+			pps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

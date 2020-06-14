@@ -10,21 +10,20 @@ import javax.inject.Named;
 import com.luigy.controller.domain.Recipe;
 import com.luigy.repository.RecipeOperation;
 
-
 @Named
 @SessionScoped
-public class RecipeBean implements Serializable  {
+public class RecipeBean implements Serializable {
 
 	List<Recipe> recipeList = new ArrayList<Recipe>();
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public List<Recipe> recipesList() {
-		
+
 		recipeList = RecipeOperation.getRecipes();
 		return recipeList;
 	}
-	
+
 	public String editRecipeRecord(int recipeCod) {
 		Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
@@ -32,39 +31,36 @@ public class RecipeBean implements Serializable  {
 			if (recipeList.get(i).getCod() == recipeCod) {
 				sessionMapObj.put("editRecordObj", recipeList.get(i));
 			}
-			
+
 		}
 		return "/editRecipe.xhtml?faces-redirect=true";
 	}
-	
-	public String updateRecipeDetails(Recipe recipeedit) {
-		RecipeOperation.updateRecipe(recipeedit);
+
+	public String updateRecipeDetails(Recipe recipeEdit) {
+		RecipeOperation.updateRecipe(recipeEdit);
 		return "/recipesList.xhtml?faces-redirect=true";
 	}
-	
 
-public String createRecipeRecord() {
-	Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-	
-	Recipe createNew = new Recipe();
-	createNew.setCod(recipeList.size() + 1);
-	
-	sessionMapObj.put("editRecordObj", createNew);
-	
-	return "/createRecipe.xhtml?faces-redirect=true";
-}
+	public String createRecipeRecord() {
+		Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
-public String saveRecipeDetails(Recipe editRecordObj) {
-	RecipeOperation.createRecipe(editRecordObj);
-	
-	return "/recipesList.xhtml?faces-redirect=true";
-}
+		Recipe createNew = new Recipe();
+		createNew.setCod(recipeList.size() + 1);
 
-public String deleteRecipeRecord(int recipeCod) {
-	RecipeOperation.deleteRecipe(recipeCod);
-	return "/recipesList.xhtml?faces-redirect=true";
-}
-	
-	
-	
+		sessionMapObj.put("editRecordObj", createNew);
+
+		return "/createRecipe.xhtml?faces-redirect=true";
+	}
+
+	public String saveRecipeDetails(Recipe editRecordObj) {
+		RecipeOperation.createRecipe(editRecordObj);
+
+		return "/recipesList.xhtml?faces-redirect=true";
+	}
+
+	public String deleteRecipeRecord(int recipeCod) {
+		RecipeOperation.deleteRecipe(recipeCod);
+		return "/recipesList.xhtml?faces-redirect=true";
+	}
+
 }

@@ -2,6 +2,7 @@ package com.luigy.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -47,32 +48,47 @@ public class StudentOperation {
 
 	public static void createStudent(Student student) {
 		try {
-			Statement stmt = getConnection().createStatement();
 			String sql = "INSERT INTO student (student_name, student_email, student_password, student_gender, student_address) "
-					+ "VALUES ('" + student.getName() + "', '" + student.getEmail() + "', '" + student.getPassword() + "', '" + student.getGender() + "', '" + student.getAddress() + "')";
-			stmt.execute(sql);
+					+ "VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement pps = getConnection().prepareStatement(sql);
+			pps.setString(1, student.getName());
+			pps.setString(2, student.getEmail());
+			pps.setString(3, student.getPassword());
+			pps.setString(4, student.getGender());
+			pps.setString(5, student.getAddress());
+
+			pps.executeUpdate();
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
+
 	public static void updateStudent(Student student) {
 		try {
-			Statement stmt = getConnection().createStatement();
-			String sql = "UPDATE student SET student_name = '" + student.getName() + "', student_email = '" + student.getEmail() + "', student_gender = '" + student.getGender() + "', student_address = '" + student.getAddress() + "' WHERE student_id = "+ student.getId();
-			stmt.execute(sql);
+			String sql = "UPDATE student SET student_name = ?, student_email = ?, student_gender = ?, student_address = ? WHERE student_id = ?";
+			PreparedStatement pps = getConnection().prepareStatement(sql);
+			pps.setString(1, student.getName());
+			pps.setString(2, student.getEmail());
+			pps.setString(3, student.getGender());
+			pps.setString(4, student.getAddress());
+			pps.setInt(5, student.getId());
+
+			pps.executeUpdate();
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
+
 	public static void deleteStudent(int studentId) {
 		try {
 			Statement stmt = getConnection().createStatement();
-			String sql = "DELETE FROM student WHERE student_Id = "+ studentId;
+			String sql = "DELETE FROM student WHERE student_Id = " + studentId;
 			stmt.execute(sql);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	
 }
