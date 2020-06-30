@@ -19,7 +19,6 @@ public class RecipeBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public List<Recipe> recipesList() {
-
 		recipeList = RecipeOperation.getRecipes();
 		return recipeList;
 	}

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+	
+	<title>CATEGORI PLATED</title>
+	<style type="text/css">
+		.tableUpdated {
+			width: 90% !important;
+			margin: 17px 58px 0 !important;
+		}
+		
+		.btnSpace {
+			margin: 17px;
+		}
+	</style>
+</h:head>
+<h:body>
+	<center>
+		<h2>
+			<h:outputText value="CATEGORI'S" />
+		</h2>
+	</center>
+	<h:form id="recipeForm">
+		<h:dataTable id="categoriTable" binding="#{table}"
+			value="#{categoriBean.categoriList()}" var="categori"
+			class="table table-striped table-hover table-bordered tableUpdated">
+			<h:column>
+				<f:facet name="header">Cod</f:facet>
+				<h:outputText value="#{categori.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Categori Name</f:facet>
+				<h:outputText value="#{categori.categoriname}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Update</f:facet>
+				<h:commandButton
+					action="#{categoriBean.editcategoriRecord(categori.id)}"
+					value="Update" class="btn btn-primary" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandButton
+					action="#{categoriBean.deletecategoriRecord(categori.id)}"
+					value="Delete" class="btn btn-danger" />
+			</h:column>
+		</h:dataTable>
+		<center>
+			<h:commandButton action="#{categoriBean.createcategoriRecord()}"
+				value="Create New categori" class="btn btn-success btnSpace" />
+		</center>
+	</h:form>
+</h:body>
+</html>

@@ -32,7 +32,7 @@ public class RecipeOperation {
 			while (rs.next()) {
 				Recipe recipe = new Recipe();
 				recipe.setCod(rs.getInt("recipe_cod"));
-				recipe.setRecipename(rs.getString("recipe_recipename"));
+				recipe.setRecipename(rs.getString("recipe_name"));
 				recipe.setIngredients(rs.getString("recipe_ingredients"));
 				recipe.setProcess(rs.getString("recipe_process"));
 				recipe.setPlatedtype(rs.getString("recipe_platedtype"));
@@ -47,7 +47,7 @@ public class RecipeOperation {
 
 	public static void createRecipe(Recipe recipe) {
 		try {
-			String sql = "INSERT INTO recipe (recipe_recipename, recipe_ingredients, recipe_process, recipe_platedtype) "
+			String sql = "INSERT INTO recipe (recipe_name, recipe_ingredients, recipe_process, recipe_platedtype) "
 					+ "VALUES (?, ? , ?, ?)";
 			PreparedStatement pps = getConnection().prepareStatement(sql);
 			pps.setString(1, recipe.getRecipename());
@@ -65,7 +65,7 @@ public class RecipeOperation {
 	public static void updateRecipe(Recipe recipe) {
 		try {
 
-			String sql = "UPDATE recipe SET recipe_recipename = ?, recipe_ingredients = ?, recipe_process = ?, recipe_platedtype = ? WHERE recipe_cod = ? ";
+			String sql = "UPDATE recipe SET recipe_name = ?, recipe_ingredients = ?, recipe_process = ?, recipe_platedtype = ? WHERE recipe_cod = ? ";
 			PreparedStatement pps = getConnection().prepareStatement(sql);
 			pps.setString(1, recipe.getRecipename());
 			pps.setString(2, recipe.getIngredients());
