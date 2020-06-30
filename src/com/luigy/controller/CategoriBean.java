@@ -56,7 +56,7 @@ public class CategoriBean implements Serializable {
 	public String saveCategoriDetails(Categori editRecordObj) {
 		CategoriOperation.createCategori(editRecordObj);
 
-		return "/recipesList.xhtml?faces-redirect=true";
+		return "/categoriList.xhtml?faces-redirect=true";
 	}
 
 	public String deleteCategoriRecord(int id) {

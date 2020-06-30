@@ -16,7 +16,7 @@ public class CategoriOperation {
 		Connection connection = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:33060/luigy", "root", "root");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:33060/luis", "root", "root");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -44,7 +44,7 @@ public class CategoriOperation {
 
 	public static void createCategori(Categori categori) {
 		try {
-			String sql = "INSERT INTO recipe (categori_name) " + "VALUES (?)";
+			String sql = "INSERT INTO categori (categori_name) " + "VALUES (?)";
 			PreparedStatement pps = getConnection().prepareStatement(sql);
 			pps.setString(1, categori.getCategoriname());
 

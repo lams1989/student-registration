@@ -1,44 +1,38 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
- 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <h:head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
-    <link rel="stylesheet" href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
-    <title>Categori edit</title>
-    <style type="text/css">
-        .updateBtnStyle {
-            width: 80px !important;         
-        }
-    </style>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet"
+		href="css/bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+	<title>Categori edit</title>
+	<style type="text/css">
+.updateBtnStyle {
+	width: 80px !important;
+}
+</style>
 </h:head>
 <h:body>
-        <h:form id="form" class="form-horizontal">
-            <div class="form-group">
-			<h:outputLabel for="categori" class="control-label col-sm-4">Categori:</h:outputLabel>
+	<h:form id="form" class="form-horizontal">
+		<div class="form-group">
+			<h:outputLabel for="categoriname" class="control-label col-sm-2">Categori Name:</h:outputLabel>
 			<div class="col-sm-4">
-				<h:selectOneRadio id="categori-id" value="#{editRecordObj.categori}"
-					validatorMessage="Categori is required">
-					<f:selectItem itemValue="desayuno" itemLabel="desayuno" />
-					<f:selectItem itemValue="comida" itemLabel="comida" />
-					<f:selectItem itemValue="bebidas" itemLabel="bebidas" />
-					<f:selectItem itemValue="bebidas con alcohol" itemLabel="bebidas con alcohol" />
-					<f:selectItem itemValue="postres" itemLabel="postres" />
-					<f:selectItem itemValue="ensaladas" itemLabel="ensaladas" />
-					<f:selectItem itemValue="drogas" itemLabel="drogas" />
-					<f:validateRequired />
-				</h:selectOneRadio>
-				<h:message class="alert alert-danger" showSummary="true"
-					showDetail="false" id="errors4" for="categori-id" />
+				<h:inputText id="categoriname-id" value="#{editRecordObj.categoriname}"
+					class="form-control" />
 			</div>
 		</div>
-            <div class="form-group">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-4">
-                    <h:commandButton value="Update" action="#{categoriBean.updateCategoriDetails(editRecordObj)}" class="btn btn-primary updateBtnStyle" />
-                </div>
-            </div>
-        </h:form>
-    </h:body>
+		<div class="form-group">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-4">
+				<h:commandButton value="Update"
+					action="#{categoriBean.updateCategoriDetails(editRecordObj)}"
+					class="btn btn-primary updateBtnStyle" />
+			</div>
+		</div>
+	</h:form>
+</h:body>
 </html>

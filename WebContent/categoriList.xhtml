@@ -42,18 +42,18 @@
 			<h:column>
 				<f:facet name="header">Update</f:facet>
 				<h:commandButton
-					action="#{categoriBean.editcategoriRecord(categori.id)}"
+					action="#{categoriBean.editCategoriRecord(categori.id)}"
 					value="Update" class="btn btn-primary" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
 				<h:commandButton
-					action="#{categoriBean.deletecategoriRecord(categori.id)}"
+					action="#{categoriBean.deleteCategoriRecord(categori.id)}"
 					value="Delete" class="btn btn-danger" />
 			</h:column>
 		</h:dataTable>
 		<center>
-			<h:commandButton action="#{categoriBean.createcategoriRecord()}"
+			<h:commandButton action="#{categoriBean.createCategoriRecord()}"
 				value="Create New categori" class="btn btn-success btnSpace" />
 		</center>
 	</h:form>
