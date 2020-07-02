@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.luigy.controller.domain.Recipe;
+import com.luigy.controller.domain.Plate;
 
 public class RecipeOperation {
 
@@ -23,14 +23,14 @@ public class RecipeOperation {
 		return connection;
 	}
 
-	public static List<Recipe> getRecipes() {
-		List<Recipe> recipes = new ArrayList<Recipe>();
+	public static List<Plate> getRecipes() {
+		List<Plate> recipes = new ArrayList<Plate>();
 
 		try {
 			Statement stmt = getConnection().createStatement();
 			ResultSet rs = stmt.executeQuery("select * from recipe");
 			while (rs.next()) {
-				Recipe recipe = new Recipe();
+				Plate recipe = new Plate();
 				recipe.setCod(rs.getInt("recipe_cod"));
 				recipe.setRecipename(rs.getString("recipe_name"));
 				recipe.setIngredients(rs.getString("recipe_ingredients"));
@@ -45,7 +45,7 @@ public class RecipeOperation {
 		return recipes;
 	}
 
-	public static void createRecipe(Recipe recipe) {
+	public static void createRecipe(Plate recipe) {
 		try {
 			String sql = "INSERT INTO recipe (recipe_name, recipe_ingredients, recipe_process, recipe_platedtype) "
 					+ "VALUES (?, ? , ?, ?)";
@@ -62,7 +62,7 @@ public class RecipeOperation {
 		}
 	}
 
-	public static void updateRecipe(Recipe recipe) {
+	public static void updateRecipe(Plate recipe) {
 		try {
 
 			String sql = "UPDATE recipe SET recipe_name = ?, recipe_ingredients = ?, recipe_process = ?, recipe_platedtype = ? WHERE recipe_cod = ? ";

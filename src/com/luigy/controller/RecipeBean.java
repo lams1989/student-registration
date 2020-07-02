@@ -7,18 +7,18 @@ import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import com.luigy.controller.domain.Recipe;
+import com.luigy.controller.domain.Plate;
 import com.luigy.repository.RecipeOperation;
 
 @Named
 @SessionScoped
 public class RecipeBean implements Serializable {
 
-	List<Recipe> recipeList = new ArrayList<Recipe>();
+	List<Plate> recipeList = new ArrayList<Plate>();
 
 	private static final long serialVersionUID = 1L;
 
-	public List<Recipe> recipesList() {
+	public List<Plate> recipesList() {
 		recipeList = RecipeOperation.getRecipes();
 		return recipeList;
 	}
@@ -35,7 +35,7 @@ public class RecipeBean implements Serializable {
 		return "/editRecipe.xhtml?faces-redirect=true";
 	}
 
-	public String updateRecipeDetails(Recipe recipeEdit) {
+	public String updateRecipeDetails(Plate recipeEdit) {
 		RecipeOperation.updateRecipe(recipeEdit);
 		return "/recipesList.xhtml?faces-redirect=true";
 	}
@@ -43,7 +43,7 @@ public class RecipeBean implements Serializable {
 	public String createRecipeRecord() {
 		Map<String, Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 
-		Recipe createNew = new Recipe();
+		Plate createNew = new Plate();
 		createNew.setCod(recipeList.size() + 1);
 
 		sessionMapObj.put("editRecordObj", createNew);
@@ -51,7 +51,7 @@ public class RecipeBean implements Serializable {
 		return "/createRecipe.xhtml?faces-redirect=true";
 	}
 
-	public String saveRecipeDetails(Recipe editRecordObj) {
+	public String saveRecipeDetails(Plate editRecordObj) {
 		RecipeOperation.createRecipe(editRecordObj);
 
 		return "/recipesList.xhtml?faces-redirect=true";

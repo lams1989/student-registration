@@ -1,17 +1,17 @@
 package com.luigy.controller.domain;
 
-public class Recipe {
+public class Plate {
 	private int cod;
 	private String recipename;
 	private String ingredients;
 	private String process;
 	private String platedtype;
 	
-	public Recipe() {
+	public Plate() {
 		super();
 	}
 	
-	public Recipe(int cod, String recipename, String ingredients, String process, String platedtype) {
+	public Plate(int cod, String recipename, String ingredients, String process, String platedtype) {
 		super();
 		this.cod = cod;
 		this.recipename = recipename;
