@@ -1,2 +1,2 @@
 # student-registration
-te amo
+esto es u ejemplo
